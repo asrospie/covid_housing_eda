@@ -1,33 +1,37 @@
-# Run this app with `python app.py` and
-# visit http://127.0.0.1:8050/ in your web browser.
-
 from dash import Dash, html, dcc
 import plotly.express as px
 import pandas as pd
+from plots import load_percent_education
+from components import get_navbar
+import dash_bootstrap_components as dbc
 
-app = Dash(__name__)
+app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
-df = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 4, 5],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-})
-
-fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
+figs = [load_percent_education(), load_percent_education()] 
+tabs = [ dbc.Tab(
+        dbc.Container(children=[
+            dcc.Graph(
+                id=str(i),
+                figure=fig
+            )
+        ]), label='Test'
+    ) for i, fig in enumerate(figs) ]
 
 app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
-
-    html.Div(children='''
-        Dash: A web application framework for your data.
-    '''),
-
-    dcc.Graph(
-        id='example-graph',
-        figure=fig
-    )
+    get_navbar(),
+    dbc.Container(children=[
+        html.H1(
+            'Test Graph',
+            className='page-title'
+        ),
+        # dcc.Graph(
+        #     id='example-graph',
+        #     figure=fig
+        # )
+        dbc.Tabs(tabs)
+    ]),
 ])
 
 if __name__ == '__main__':
