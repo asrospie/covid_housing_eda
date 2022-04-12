@@ -23,7 +23,7 @@ app.layout = html.Div(children=[
     get_navbar(),
     dbc.Container(children=[
         html.H1(
-            'Test Graph',
+            'Dashboard',
             className='page-title'
         ),
         # dcc.Graph(
