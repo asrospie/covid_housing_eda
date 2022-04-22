@@ -6,6 +6,7 @@ from components import get_navbar
 import dash_bootstrap_components as dbc
 
 app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
