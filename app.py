@@ -1,5 +1,5 @@
 from dash import Dash, html, dcc, callback, Input, Output
-from components import get_navbar, dashboard_page, correlations_page
+from components import get_navbar, dashboard_page
 import dash_bootstrap_components as dbc
 
 app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -17,8 +17,6 @@ app.layout = html.Div(children=[
 def display_page(pathname):
     if pathname == '/':
         return dashboard_page()
-    elif pathname == '/correlations':
-        return correlations_page()
     else:
         return dashboard_page()
 

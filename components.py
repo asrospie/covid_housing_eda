@@ -1,4 +1,4 @@
-from dash import Dash, html, dcc, callback, Input, Output
+from dash import Dash, html, dcc, callback, Input, Output, dash_table
 import plotly.express as px
 import pandas as pd
 from plots import load_prev_measures, load_percent_education, load_violin, load_region_graph, load_income_distribution
@@ -8,7 +8,6 @@ def get_navbar():
     return dbc.NavbarSimple(
         children=[
             dbc.NavItem(dbc.NavLink('Home', href='/')),
-            dbc.NavItem(dbc.NavLink('Correlations', href='/correlations')),
         ],
         brand='Covid Housing EDA', 
         brand_href='#',
@@ -54,9 +53,3 @@ def dashboard_page():
         ),
         dbc.Tabs(tabs)
     ]) 
-
-def correlations_page():
-    return html.Div(children=[
-        html.H1('Correlations', className='page-title'),
-        html.Div('More coming soon I promise...')
-    ])
